@@ -1,0 +1,571 @@
+%------------------------------------------------------------------------------
+% Resume in Latex
+% Author : Hanji (Zhiheng) Xu (modified from Shubham Mazumder)
+% License : MIT
+%------------------------------------------------------------------------------
+
+\documentclass[letterpaper,10pt]{article}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+% \hypersetup{
+%     colorlinks=true,
+%     urlcolor=blue,  % or your preferred color
+%     linkcolor=blue
+% }
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{soul}
+\ifdefined\pdfglyphtounicode\input{glyphtounicode}\fi  % pdfTeX only; XeTeX (tectonic) skips it
+\usepackage[margin=0.5in]{geometry}
+% Load blindtext package
+\usepackage{blindtext}
+% Load the parskip package with skip and indent options
+\usepackage[skip=6pt plus1pt, indent=10pt]{parskip}
+\usepackage{tagging}
+
+%----------FONT OPTIONS----------
+% Sans-serif Fonts
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault,light]{inter}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage{roboto}
+% \usepackage[sfdefault,medium]{InriaSans}
+\usepackage[default]{sourcesanspro}
+
+% Serif Fonts
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+% -------------------------------------
+%----------PAGE SETUP------------------
+% -------------------------------------
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+% \addtolength{\oddsidemargin}{0.5pt}
+% \addtolength{\evensidemargin}{0.5pt}
+% \addtolength{\textwidth}{0.9in}
+% \addtolength{\topmargin}{-0.6in}
+% \addtolength{\textheight}{1.6in}
+
+% \addtolength{\oddsidemargin}{-.875in}
+% \addtolength{\evensidemargin}{-.875in}
+% \addtolength{\textwidth}{1.75in}
+% \addtolength{\topmargin}{-.875in}
+% \addtolength{\textheight}{1.75in}
+
+% URL style
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\ifdefined\pdfgentounicode\pdfgentounicode=1\fi  % pdfTeX only
+
+%--------------- Custom commands -----------------------
+
+\newcommand{\sectionspace}{
+\vspace{-8pt}
+}
+
+\newcommand{\subheadingtitlevspace}{
+\vspace{-3pt}
+}
+
+
+% Resume Item
+\newcommand{\resumeItem}[1]{
+  \item{
+    {#1 \vspace{-7pt}}
+  }
+}
+
+
+% Titles
+\newcommand{\titleItem}[1]{
+  % \textsl{\textbf{#1}}
+  \textbf{#1}
+}
+
+
+% for education long major/minor lists
+\newcommand{\resumeSubheading}[4]{
+  \item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textit{#2} \\
+      #3 & \textit{#4} \\
+    \end{tabular*}\vspace{-10pt}
+}
+
+
+% Resume Project Heading
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      #1 & \textit{ #2} \\
+    \end{tabular*}\vspace{-6pt} %changing line width between items
+}
+
+%Resume Subheading List
+\newcommand{\resumeSubHeadingListStart}{\subheadingtitlevspace\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+%Resume Item List
+\newcommand{\resumeItemListStart}{
+\vspace{0pt} %project title and content spacing
+\begin{itemize}}
+\newcommand{\resumeItemListEnd}{
+% \vspace{-6pt}
+\end{itemize}\vspace{3pt}} % change linewidth between last line of previous project and first line of new project
+
+
+%--------------- Custom commands -----------------------
+
+% Summary Block Command
+\newcommand{\summaryBlock}[2]{
+    \begin{taggedblock}{#1}
+        \begin{itemize}[leftmargin=0.15in, label={}]
+            \item{#2}
+        \end{itemize}
+    \end{taggedblock}
+}
+
+% Course List Command
+\newcommand{\courseList}[1]{
+    \begin{itemize}[leftmargin=0.15in, label={}]
+    {\item{
+     {\textbf{Selected Courses}: #1}\\
+    }}
+    \end{itemize}
+}
+
+% Skill Item Command
+\newcommand{\skillItem}[3]{
+    \tagged{#1}{\titleItem{#2}{: #3}}
+}
+
+
+%--------------- Tag Configuration -----------------------
+% Complete tag list: environment, engineering, design, management, research, social, data,
+% environmental engineering, consultant, transportation, planner, landscape design,
+% industrial design, UX design, data science, researcher, experimenter
+
+% Environmental Engineering Focus
+\newcommand{\setEnvironmentalEngineeringTags}{
+    \usetag{environmental engineering, environment, engineering}
+    \droptag{design, management, research, social, data, consultant, transportation, planner,
+             landscape design, industrial design, UX design, data science, researcher, experimenter}
+}
+
+% Environmental Consultant Focus
+\newcommand{\setEnvironmentalConsultantTags}{
+    \usetag{consultant, environment, engineering, research}
+    \droptag{design, management, data, transportation, planner, landscape design,
+             industrial design, UX design, data science, researcher, experimenter}
+}
+
+% Research & Social Impact Focus
+\newcommand{\setResearcherTags}{
+    \usetag{researcher, research, social, data}
+    \droptag{transportation, environment, engineering, design, management, consultant, planner,
+             landscape design, industrial design, UX design, data science}
+}
+
+% Industrial Design Focus
+\newcommand{\setIndustrialDesignTags}{
+    \usetag{industrial design, design, management,environment}
+    \droptag{transportation, engineering, research, data, consultant, planner,
+             landscape design, UX design, data science, researcher, experimenter}
+}
+
+% UX Design Focus
+\newcommand{\setUXDesignTags}{
+    \usetag{UX design, design, management, data}
+    \droptag{transportation, environment, engineering, research, consultant, planner,
+             landscape design, industrial design, data science, researcher, experimenter}
+}
+
+% Landscape Design Focus
+\newcommand{\setLandscapeDesignTags}{
+    \usetag{landscape design, design, environment}
+    \droptag{transportation, engineering, management, research, data, consultant, planner,
+             industrial design, UX design, data science, researcher, experimenter}
+}
+
+% Data Science Focus
+\newcommand{\setDataScienceTags}{
+    \usetag{data science, data, research, engineering}
+    \droptag{transportation, environment, design, management, consultant, planner,
+             landscape design, industrial design, UX design, researcher, experimenter}
+}
+
+% Multiple Focus (All Tags)
+\newcommand{\setAllTags}{
+    \usetag{environment, engineering, design, management, research, social, data,
+            environmental engineering, consultant, transportation, planner, landscape design,
+            industrial design, UX design, data science, researcher, experimenter}
+}
+
+%--------------- Active Tag Selection ----------------------
+% Choose ONE of these:
+% \setEnvironmentalEngineeringTags
+% \setEnvironmentalConsultantTags
+ \setResearcherTags
+ \setIndustrialDesignTags
+% \setUXDesignTags
+% \setLandscapeDesignTags
+% \setDataScienceTags
+% \setAllTags
+% ---------------------- RESUME --------------------------
+
+\begin{document}
+
+% Header
+\begin{flushleft}
+    \textbf{\large Hanji (Zhiheng) Xu} \\    
+    \href{mailto:hxu01@risd.edu}{{\textit{hxu01@risd.edu}}} $|$ 
+    \href{https://linkedin.com/in/zhiheng-hanji-xu/}{{\textit{Linkedin @Hanji Xu}}} $|$
+    \href{https://design.hanjixu.com/}{{\textit{portfolio @design.hanjixu.com}}}
+    \vspace{-5pt}
+\end{flushleft}
+
+% % Summary Section
+% \section{Summary}
+% \summaryBlock{design,management}{
+%         An environmental product designer who crafts human-centered, resource-conscious CPG solutions from 0 to 1, with 2 years of manufacturing design experience. My sustainable menstrual product startup ida shows this through \$23.5k funding and 4 prototypes based on 151 customer interviews, while leading strategy with engineers, UX, and OBGYNs through R\&D uncertainty.
+%         }
+% \summaryBlock{environment,engineering}{
+%         I am an environmental designer with a focus on sustainable systems and energy efficiency. My technical expertise spans from the chemistry of GHG emissions, environmental engineering, energy LCA, systems engineering, flood risk evaluation, to data analysis, programming, machine learning, and GIS. I am well-versed in the Living Building Challenge framework (comparable to LEED). I have a proven track record of translating complex data into actionable insights, as demonstrated by my work in solar energy prediction and flood risk management.
+%         }
+% \summaryBlock{research,social}{
+%         I am an environmental designer and researcher with a focus on climate action and resource efficiency. My experience spans field work, environmental engineering, flood risk evaluation, and stakeholder engagement through climate change communication. Drawing on my human-centered design background, I create effective solutions and communications for social impact. My approach combines technical expertise with community engagement, as demonstrated through my work in flood risk management research and climate change perception studies. My experience extends to authoring technical reports and curating exhibitions for cross-sector conferences.
+%         }
+% \summaryBlock{transportation}{
+%         An environmental designer and researcher with a passion for sustainable transportation and urban planning. Experienced in analyzing transportation systems, designing with human factors engineering, conducting user A/B testing and surveys, and creating data-driven solutions using GIS for research. Engaged stakeholders through climate change communication and public speaking. Avid transit user and explorer, including shared mobility services, self-driving taxis, and last-mile shuttles. Seeking to leverage my multidisciplinary background in cognitive science, data analysis, and environmental design to promote sustainable commuting options and reduce single-occupancy vehicle use.
+%         }
+
+\vspace{-7pt}
+% Education Section
+\section{Education}
+    \resumeSubHeadingListStart
+    \resumeSubheading
+      {Rhode Island School of Design}{Aug 2025 - May 2027}{MID Master of Industrial Design (Graduate Fellowship Recipient)}{}\\
+  \resumeSubHeadingListEnd
+\vspace{6pt}
+    \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of California, Berkeley}{Aug 2021 - Aug 2025}{B.A. Cognitive Science (magna cum laude), Minors in Data Science and Landscape Architecture}{GPA: 3.95}\\
+  \resumeSubHeadingListEnd
+\vspace{6pt}
+% \begin{taggedblock}{industrial design, UX design}{
+%     \courseList{Product Development, Human Factors, Material Science, Environmental Engineering, Energy and Society, Design Thinking, Visual Storytelling, Neuroscience of Happiness, Behavioral Economics, Computer Simulation, Data Science}
+%     }
+% \end{taggedblock}
+\begin{taggedblock}{environmental engineering, consultant}{
+    \courseList{Environmental Engineering, Material Science, Energy and Society, Flood Risk Management, Airport Design, \\
+     Planting Design, Computer Simulation of Earth Phenomenon, Human Factors Engineering, Data Science, Signal Processing, \\
+     Discrete Mathematics, Intermediate Logic, Behavioral Economics, Linguistics, Neuroscience of Happiness, Chinese Buddhism}
+    }
+\end{taggedblock}
+% \begin{taggedblock}{planner, landscape design}{
+%     \courseList{Planting Design, Airport Design, Landscape History, Flood Risk Management, Environmental Engineering,\\ 
+%      Human Factors Engineering, Energy and Society, Material Science, Computer Simulation, Data Science, Behavioral Economics, \\
+%      Visual Storytelling, Neuroscience of Happiness, Linguistics, Signal Processing, Discrete Mathematics, Intermediate Logic}
+%     }
+% \end{taggedblock}
+% \begin{taggedblock}{transportation}{
+%     \courseList{Airport Design, Flood Risk Management, Environmental Engineering, Human Factors Engineering, \\ 
+%      Computer Simulation, Data Science, Behavioral Economics, Energy and Society, Material Science, Planting Design, \\
+%      Landscape History, Visual Storytelling, Neuroscience of Happiness, Linguistics, Signal Processing, Discrete Mathematics}
+%     }
+% \end{taggedblock}
+% \begin{taggedblock}{data science, researcher, experimenter}{
+%     \courseList{Data Science, Signal Processing, Computer Simulation of Earth Phenomenon, Discrete Mathematics, \\
+%      Intermediate Logic, Behavioral Economics, Environmental Engineering, Material Science, Energy Science, Flood Management,\\
+%      Human Factors Engineering, Airport Design, Visual Storytelling, Planting Design, Linguistics, Neuroscience of Happiness}
+%     }
+% \end{taggedblock}
+% \begin{taggedblock}{engineering, design engineering}{
+%     \courseList{3D Modeling for Design (ENGIN 26: SolidWorks with simulation/FEA), BME Bootcamp, Properties of Materials Lab, Human Factors Engineering, Visual Communication \& Sketching, Material Science, Environmental Engineering, Computer Simulation, Data Science}
+%     }
+% \end{taggedblock}
+
+\sectionspace
+\vspace{2pt}
+
+\vspace{-2pt}
+\section{Work in Design}
+\resumeSubHeadingListStart
+    \tagged{design,engineering,management}{
+        \resumeProjectHeading
+           {\emph{Principal Material Researcher} $|$ \href{https://softmode.ai}{\titleItem{Softmode.ai, an LLM interface activated through interacting with clay}}}{Mar 2026 - Present}
+        \resumeItemListStart
+            \resumeItem{Led material research across a 5-person SWE/design/strategy team, exploring clay’s physical properties as metaphor.}
+            \resumeItem{Translated sensor data streams into text and image responses via the Claude API, computer vision, and Arduino.}
+            \resumeItem{Won the Tenstorrent Sponsor Prize at MIT Media Lab Hard Mode Hackathon.}
+            \resumeItem{Selected by Anthropic to exhibit at invitation-only Code with Claude conference in San Francisco, London, and Tokyo.}
+        \resumeItemListEnd
+    }
+    \tagged{design,data,engineering}{
+        \resumeProjectHeading
+           {\emph{Inventor} $|$ \titleItem{Universal Clock, for scheduling meeting time between time zones}}{July 2024 - Present}
+        \resumeItemListStart
+            \resumeItem{Granted 2 Chinese patents (utility model CN 224889036 U; design CN 310257717 S); CNC-milled wood and 3D-printed plastic components through 40+ iterations.}
+            \resumeItem{Led 7-person cross-functional team across engineering, business, and design.}
+            \resumeItem{Delivered 2 production units with buyers praising quality and ease of international meeting coordination.}
+            \resumeItem{Exhibited during Fidget Camp at Pebblebed VC, generating 32 purchase inquiries from 500+ visitors.}
+        \resumeItemListEnd
+    }
+    \tagged{design,engineering,management}{
+        \resumeProjectHeading
+           {\emph{Principal Designer} $|$ \href{https://hi-ida.com}{\titleItem{ida (hi-ida.com), a Compact Reusable Menstrual Cup Startup}}}{July 2023 - Present}
+        \resumeItemListStart
+            \resumeItem{Secured \$23.5k grants, led a cross-functional team (US/China/Singapore) and medical advisors for FDA Class II device.}
+            \resumeItem{Mapped out 5-year strategy and budget for patent filing, clinical trials, quality compliance, and supplier sourcing.}
+            \resumeItem{Prototyped 4 iterations using processes including plaster casting, silicone and metal molding, and metal heat treatment.}
+            \resumeItem{Built verification test fixtures, modeling the vaginal environment through CAD and in-house manufacturing.}
+            \resumeItem{Validated market demand through 151 global user interviews; exhibited at Open Sauce Convention with 20k+ attendees.}
+        \resumeItemListEnd
+    }
+    \tagged{design}{
+        \resumeProjectHeading
+           {\emph{Research Intern} $|$ \titleItem{Morphing Matter Lab, UC Berkeley (NSF-funded E-Seed project)}}{May 2025 - May 2026}
+        \resumeItemListStart
+            \resumeItem{Developed educational toolkits, exploring biomaterial properties to translate hygromorphic self-burial engineered seed research into K-12 outreach activities.}
+            \resumeItem{Fabricated 4 educational modules using off-the-shelf parts with DFM-optimized, flat-packable design enabling replication across collaborating laboratories including CMU, UPenn, and Syracuse University, through documentation protocols.}
+            \resumeItem{Assessed toolkit effectiveness through structured 60-minute user sessions and field research at educational exhibitions.}
+        \resumeItemListEnd
+    }
+    \tagged{}{
+        \resumeProjectHeading
+           {\emph{Project Management Intern} $|$ \titleItem{University of California, San Francisco (UCSF) Catalyst Program}}{June - Sep 2024}
+        \resumeItemListStart
+            \resumeItem{Accelerated the delivery of Target Product Profile (TPP) for FDA Class II device from 10 to 6 weeks with a 6-person team.}
+            \resumeItem{Implemented iterative document reviews and role-specific deliverables to revitalize stalled project.}
+        \resumeItemListEnd
+    }
+    \tagged{design,environment}{
+        \resumeProjectHeading
+           {\emph{Landscape Architect} $|$ \titleItem{2500 ft² Historic Berkeley Garden Redesign}}{Jan 2024 - Apr 2024}
+        \resumeItemListStart
+            \resumeItem{Delivered 3 distinct design proposals (Japanese, modernist, native Californian) for a Julia Morgan property.}
+            \resumeItem{Developed water-efficient planting around a heritage Deodar Cedar; produced site analysis, measurements, and plans.}
+        \resumeItemListEnd
+    }
+    \tagged{design,environment,engineering}{
+        \resumeProjectHeading
+           {\emph{Engineering Intern} $|$ \titleItem{Shanghai Institute for Design \& Research on Environmental Engineering}}{June 2023 - July 2023}
+        \resumeItemListStart
+            \resumeItem{Developed architectural plans of a 150k ft\textsuperscript{2} waste management facility for a Xianyou government contract.}
+            \resumeItem{Drafted the 3D design with SketchUp and the 2D site plan with AutoCAD, Photoshop, and Illustrator.}
+        \resumeItemListEnd
+    }
+\resumeSubHeadingListEnd
+
+\vspace{-2pt}
+\section{Other Work}
+\resumeSubHeadingListStart
+    \tagged{design,engineering,management}{
+        \resumeProjectHeading
+           {\emph{Operations Improvement Consultant} $|$ \titleItem{Highlight Tech Corp. (TWSE: 6208)}}{Aug 2026 - Sep 2026}
+        \resumeItemListStart
+            \resumeItem{Diagnosed process inefficiencies within 5 days at HTC, a vacuum system provider serving TSMC and Applied Materials.}
+            \resumeItem{Deployed a zero-cost batch-generation fix that eliminated 80,000 manual edits/year (200 labor hours).}
+            \resumeItem{Corrected valve leak-rate format in QC documentation to remove ambiguity in engineering requirements.}
+        \resumeItemListEnd
+    }
+    \tagged{environment}{
+        \resumeProjectHeading
+           {\emph{Summer Farm Laborer} $|$ \titleItem{Brookview Orchard Limited}}{Dec 2024 - Jan 2025}
+        \resumeItemListStart
+            \resumeItem{Removed suckers and weeds across 12,000 vines in 10-hectare first-season Zespri kiwifruit orchard in New Zealand.}
+        \resumeItemListEnd
+    }
+%     \tagged{environment,social,management}{
+%         \resumeProjectHeading
+%            {\emph{Event Planning \& Marketing Intern} $|$ \titleItem{Global Climate Innovation Coalition (GCIC)}}{Aug - Sep 2024}
+%         \resumeItemListStart
+%             \resumeItem{Planned the GCIC second annual summit at the United Nations Headquarters, supervised by the Executive Director.}
+%             \resumeItem{Assisted with event preparation, drafted themes for panelists, reported on roundtables, and compiled news reports.}
+%         \resumeItemListEnd
+%     }
+    \tagged{environment,data,research}{
+        \resumeProjectHeading
+           {\emph{Machine Learning Intern} $|$ \titleItem{Energesque (Berkeley Skydeck Startup)}}{May 2024 - Aug 2024}
+        \resumeItemListStart
+            \resumeItem{Trained KNN, Random Forest, XGBoost, and LSTM models for solar energy prediction; improved mean absolute error and computation time by 10x over the team's prior approach.}
+            \resumeItem{Cleaned 500,000+ rows of meteorological data from NASA, Solcast, and OpenWeather and distilled into 2 suggestions.}
+        \resumeItemListEnd
+    }
+    \tagged{environment,research,social}{
+        \resumeProjectHeading
+           {\emph{Environmental Justice Researcher} $|$ \titleItem{The Intersection of Homelessness and Flood Risk Management}}{Jan 2024 - Aug 2024}
+        \resumeItemListStart
+            \resumeItem{Collected field data along 6 miles of Coyote Creek on  infrastructure, encampments, and services; interviewed agencies.}
+            \resumeItem{Won 1st place at ASFPM 2024 with an ArcGIS map documenting the overlap between floodplain and encampments.}
+            \resumeItem{Presented at Valley Water's public hearing and solution summit.}
+        \resumeItemListEnd
+    }
+%     \tagged{environment,research,social}{
+%         \resumeProjectHeading
+%            {\emph{Undergraduate Researcher} $|$ \titleItem{Climate Change Perception among Evangelical Christians}}{Sep 2022 - Sep 2023}
+%         \resumeItemListStart
+%             \resumeItem{Launched a pilot survey of 55 participants to observe the impact on Evangelicals' climate beliefs after subjects perceive friendship between an Evangelical Christian and a climate scientist.}
+%         \resumeItemListEnd
+%     }
+    \tagged{data}{
+        \resumeProjectHeading
+           {\emph{Marketing \& Investment Intern} $|$ \titleItem{Shanghai SUS Environment}}{May - June 2023}
+        \resumeItemListStart
+            \resumeItem{Automated data extraction from Excel and pdf files to archive government bid submissions via regex.}
+            \resumeItem{Automated web-scraping of a government online database in python by bypassing CAPTCHA.}
+            \resumeItem{Saved over 40 hrs of collective work with automation.}
+        \resumeItemListEnd
+    }
+\resumeSubHeadingListEnd
+
+\vspace{-2pt}
+\section{Projects}
+\resumeSubHeadingListStart
+    \tagged{social}{
+        \resumeProjectHeading
+           {\titleItem{Cyan Project} $|$ \emph{A free summer camp for underprivileged students in Jiangxi, China}}{July 2015 - July 2023}
+        \resumeItemListStart
+            \resumeItem{Co-founded and led a free summer sex-ed program in rural Jiangxi, China with 20 volunteers, reaching 300+ students.}
+        \resumeItemListEnd
+    }
+    \tagged{design}{
+        \resumeProjectHeading
+           {\titleItem{Ergonomic Design Lead} $|$ \emph{Drywall Transportation Device for Construction Workers}}{Jan - May 2023}
+        \resumeItemListStart
+            \resumeItem{Designed shoulder-mount clip, reducing RULA score from 10 to 7 and improving NIOSH lifting index by 14.6\%.}
+            \resumeItem{Identified 42.7° neck strain and 140° elbow flexion during material handling tasks, and sketched 4 solution concepts.}
+            \resumeItem{Prototyped  ergonomic device based on the anthropometric analysis of 5th to 95th percentile male users.}
+        \resumeItemListEnd
+    }
+%     \tagged{data,research}{
+%         \resumeProjectHeading
+%            {\titleItem{Property Evaluation Machine Learning} $|$ \emph{Modeling Cook County, IL, Assessor’s Office Property Price}}{March - May 2023}
+%         \resumeItemListStart
+%             \resumeItem{Found retrogressive tax policies; optimized a supervised machine learning model through data cleaning, feature engineering, and k-fold cross-validation to predict property assessment price in Cook County.}
+%         \resumeItemListEnd
+%     }
+\resumeSubHeadingListEnd
+
+\vspace{-2pt}
+\section{Honors \& Certifications}
+\resumeSubHeadingListStart
+    \tagged{design}{
+        \resumeProjectHeading
+           {\titleItem{Accepted to demo at UIST 2026 Student Innovation Contest} \emph{ $|$ Built a telephone that senses bio signals.}}{Nov 2026}
+    }
+    \tagged{design,social}{
+        \resumeProjectHeading
+           {\titleItem{reharvest repair, Juried Group Exhibition} \emph{ $|$ Juci iPhone selected from 140+ entries; Providence Public Library.}}{Oct - Dec 2026}
+    }
+    \tagged{design,engineering,data}{
+        \resumeProjectHeading
+           {\titleItem{Utility Model Patent CN 224889036 U} \emph{ $|$ Multi-time-zone synchronized clock (ZL 2025 2 2720633.6), sole inventor.}}{Oct 2026}
+    }
+    \tagged{design,engineering,data}{
+        \resumeProjectHeading
+           {\titleItem{Design Patent CN 310257717 S} \emph{ $|$ Clock (ZL 2026 3 0301245.1), sole designer.}}{Oct 2026}
+    }
+    \tagged{design}{
+        \resumeProjectHeading
+           {\titleItem{Jingdezhen Taoxichuan Artist Residency} \emph{ $|$ 2 Month ceramic phenomenological art.}}{June 2026}
+    }
+%     \tagged{design}{
+%         \resumeProjectHeading
+%            {\titleItem{MIT Hard Mode Hackathon Winner} \emph{ $|$ Created a clay-activated LLM interface, selected by Anthropic.}}{Mar 2026}
+%     }
+    \tagged{design,social}{
+        \resumeProjectHeading
+           {\titleItem{\$880 Grant} \emph{ $|$ RISD ID Health Fund sponsored development of 4 hobbyist fume hoods for respiratory health.}}{Mar 2026}
+    }
+%     \tagged{design,social, environment}{
+%         \resumeProjectHeading
+%            {\titleItem{\$15,000 Grant} \emph{ $|$ 1 of 2 undergrads among a grad cohort for Berkeley Public Health's Social Impact Innovation Program.}}{Jan 2025}
+%     }
+%     \tagged{environment,social}{
+%         \resumeProjectHeading
+%            {\titleItem{\$7,200 Scholarship} \emph{ $|$ Attended CITRIS Innovation Intensive on Climate on 4 University of California campuses.}}{Oct 2024}
+%     }
+%     \tagged{design}{
+%         \resumeProjectHeading
+%            {\titleItem{\$2,500 Grant} \emph{ $|$ Jacobs Institute for Design Innovation, recipient of both Spark Grant and Ignite Grant.}}{Sep 2024}
+%     }
+    \tagged{research}{
+        \resumeProjectHeading
+           {\titleItem{Stipend of \$6,000} \emph{ $|$ Cognitive Science Career Catalyst program awards 4 students out of 1000 students in the major.}}{May 2024}
+    }
+%     \tagged{environment,engineering,research}{
+%         \resumeProjectHeading
+%            {\titleItem{1st place with \$1,600 prize } \emph{ $|$ Student Paper Competition at the Association of State Floodplain Managers (ASFPM).}}{June 2024}
+%     }
+%     \tagged{design,environment}{
+%         \resumeProjectHeading
+%            {\titleItem{1st place with \$500 prize} \emph{ $|$ Led zero-waste food dispenser strategy at UC Berkeley's PourOutPepsi Designathon.}}{Mar 2024}
+%     }
+    \tagged{design,management}{
+        \resumeProjectHeading
+           {\titleItem{Top 30 Finalist} \emph{ $|$ Among 150 startups in the Berkeley Big Ideas Entrepreneurship Contest with ida.}}{Jan 2024}
+    }
+    \tagged{social, environment}{
+        \resumeProjectHeading
+           {\titleItem{Millennium Fellowship Campus Director} \emph{ $|$ UN impact program with 0.3\% acceptance rate for furthering 3 SDGs.}}{Aug 2023}
+    }
+%     \tagged{design,engineering}{
+%         \resumeProjectHeading
+%            {\titleItem{Berkeley Certificate in Design Innovation} \emph{ $|$ Sponsored by College of Engineering, Environmental Design, and Haas.}}{May 2023}
+%     }
+%     \tagged{environment,social}{
+%         \resumeProjectHeading
+%            {\titleItem{Grantee of \$256} \emph{ $|$ Berkeley Eco Fund for starting a victory garden in my community parking lot.}}{Mar 2023}
+%     }
+\resumeSubHeadingListEnd
+
+\vspace{-2pt}
+% Skills Section
+\section{Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \item{
+        \skillItem{data, engineering, research, design}{Coding}{Python, Java, SQL, NumPy, Scikit-learn, Pandas, CSS, HTML, JMP by SAS} \\
+        \skillItem{design, engineering}{Software}{Rhino, Grasshopper, Keyshot, Blender, Adobe Suite, Figma, SketchUp, AutoCAD, Fusion 360, Solidworks, GIS} \\
+%         \skillItem{engineering}{Analysis}{FEA and simulation (SolidWorks Simulation, from ENGIN 26 at Berkeley), DFM/DFA, anthropometrics (RULA, NIOSH)} \\
+        \skillItem{engineering, design}{Prototyping}{3D Printing, CNC Mill and Lathe, Injection Molding, Power Carving, Chainsaw, Ceramics \& Wood \& Metal, Welding} \\
+        \skillItem{engineering, design}{Repairing}{Juci (Staple Porcelain Restoration), Sewing} \\
+        \titleItem{Communication}{: English, Mandarin, French (limited), Grant Writing, Public Speaking, Prior Art Research} \\
+        \titleItem{Emergency}{: First Aid, Cardiopulmonary Resuscitation (CPR), Stop The Bleed (STB)} \\
+    }
+\end{itemize}
+
+\vspace{-6pt}
+% Interests Section
+\section{Interests}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    {\item{
+     {Trip Planning, Sleeping on public transit, Long-distance Biking and Running, Swimming, Snowboarding, Building Igloo, Jazz, Decluttering \& Gifting, Conserving Utilities, Lock-picking, Pickling Kimchi} \\ 
+    }}
+ \end{itemize}
+ \sectionspace
+
+\end{document}
